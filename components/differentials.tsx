@@ -19,29 +19,32 @@ function FeatureCard({ title, description, iconSrc, delay = 0 }: FeatureCardProp
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, delay }}
-      className="flex gap-4 group"
+      whileHover={{ y: -8, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
+      className="bg-white rounded-xl shadow-md p-6 text-center h-full border border-pink-100 transition-all duration-300 hover:border-pink-300"
     >
-      <motion.div 
-        whileHover={{ scale: 1.1, rotate: 5 }}
-        transition={{ duration: 0.2 }}
-      >
-        <Image 
-          src={iconSrc} 
-          alt={title}
-          width={40}
-          height={40}
-          className="h-50 w-50"
-        />
-      </motion.div>
+      <div className="flex justify-center mb-2">
+        <motion.div 
+          whileHover={{ scale: 1.1, rotate: 5 }}
+          transition={{ duration: 0.2 }}
+        >
+          <Image 
+            src={iconSrc} 
+            alt={title}
+            width={50}
+            height={50}
+            className="h-30 w-30"
+          />
+        </motion.div>
+      </div>
       <div>
-        <h3 className="font-bold text-navy-blue mb-2 group-hover:text-pink-500 transition-colors">{title}</h3>
-        <p className="text-sm text-gray-600">{description}</p>
+        <h3 className="font-bold text-lg text-navy-blue mb-3 group-hover:text-pink-500 transition-colors">{title}</h3>
+        <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
       </div>
     </motion.div>
   );
 }
 
-export function Differentials () {
+export function Differentials() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
