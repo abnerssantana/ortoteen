@@ -101,7 +101,7 @@ export function Footer() {
                     </div>
                     <div>
                       <p className="text-blue-200 text-sm">HORÁRIO DE FUNCIONAMENTO</p>
-                      <p className="text-white">09:00 - 19:00</p>
+                      <p className="text-white">09:00 - 18:00</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
@@ -141,35 +141,6 @@ export function Footer() {
                   <li>
                     <Link href="/contato" className="text-blue-100 hover:text-white transition-colors">
                       Contato
-                    </Link>
-                  </li>
-                </ul>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.5 }}
-              >
-                <h3 className="text-lg font-semibold mb-4">Serviços</h3>
-                <ul className="space-y-2">
-                  <li>
-                    <Link href="/servicos/ortodontia" className="text-blue-100 hover:text-white transition-colors">
-                      Ortodontia
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/servicos/clareamento" className="text-blue-100 hover:text-white transition-colors">
-                      Clareamento
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/servicos/invisalign" className="text-blue-100 hover:text-white transition-colors">
-                      Invisalign
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/servicos/prevencao" className="text-blue-100 hover:text-white transition-colors">
-                      Prevenção
                     </Link>
                   </li>
                 </ul>
