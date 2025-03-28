@@ -4,6 +4,7 @@ import matter from 'gray-matter';
 import readingTime from 'reading-time';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import rehypeHighlight from 'rehype-highlight';
+import { mdxComponents } from '@/components/blog/mdx-components';  // Import the components
 
 // Define the blog post type
 export type BlogPost = {
@@ -107,7 +108,8 @@ export async function compileMDXContent(content: string) {
       mdxOptions: {
         rehypePlugins: [rehypeHighlight]
       }
-    }
+    },
+    components: mdxComponents  // Pass the custom components here
   });
   
   return compiledContent;
