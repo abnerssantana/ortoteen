@@ -64,6 +64,19 @@
   }
 }
 
+/* Font settings */
+body {
+  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
 /* Custom colors based on the original website */
 .bg-light-blue {
   background-color: #e6f7ff;
@@ -76,4 +89,3 @@
 .bg-navy-blue {
   background-color: #1e2b5a;
 }
-

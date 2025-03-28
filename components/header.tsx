@@ -55,14 +55,8 @@ export function Header() {
     >
       <div className="container px-4 sm:px-2 mx-auto flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="flex items-center relative z-10">
-          <Image
-            src="/placeholder-logo.png"
-            alt="Logo Ortoteen"
-            width={90}
-            height={40}
-            className="h-10 w-auto"
-          />
+        <Link href="/" className="flex items-center relative z-10 text-2xl font-bold text-navy-blue transition-colors hover:text-pink-500">
+          Ortoteen
         </Link>
 
         {/* Navegação Desktop */}

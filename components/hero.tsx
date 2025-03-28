@@ -122,8 +122,8 @@ export function Hero() {
                   <Phone className="h-5 w-5 text-pink-500" />
                 </div>
                 <div>
-                  <p className="text-xs text-pink-500 font-medium">FALE CONOSCO</p>
-                  <p className="text-navy-blue font-medium">17 98114-1014</p>
+                  <p className="text-sm text-pink-500 font-medium">FALE CONOSCO</p>
+                  <p className="text-2xl text-navy-blue font-bold">17 98114-1014</p>
                 </div>
               </div>
             </motion.div>
@@ -169,16 +169,15 @@ export function Hero() {
             variants={itemVariants}
             className="relative"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-xl">
-              <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 to-blue-500/20 mix-blend-overlay z-10"></div>
-              
+            <div className="relative rounded-2xl overflow-hidden">
+                        
               <motion.div
                 className="relative z-0"
                 animate={{ scale: [1, 1.03, 1] }}
                 transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
               >
                 <Image 
-                  src="/placeholder.jpg" 
+                  src="/home.png" 
                   alt="Paciente em consulta odontológica" 
                   width={600}
                   height={700}
@@ -188,26 +187,11 @@ export function Hero() {
               
               {/* Decorative elements */}
               <motion.div 
-                className="absolute top-5 left-5 p-3 bg-white/90 backdrop-blur-sm border border-pink-100 rounded-lg shadow-lg z-20"
+                className="absolute top-5 right-10 p-3 bg-white/90 backdrop-blur-sm border border-pink-100 rounded-lg shadow-lg z-20"
                 animate={{ y: [0, 8, 0] }}
                 transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
               >
                 <Smile className="h-6 w-6 text-pink-500" />
-              </motion.div>
-              
-              <motion.div 
-                className="absolute bottom-5 right-5 p-4 bg-white/90 backdrop-blur-sm border border-pink-100 rounded-lg shadow-lg z-20"
-                animate={{ y: [0, -8, 0] }}
-                transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-              >
-                <div className="flex flex-col items-center">
-                  <div className="flex">
-                    {"★★★★★".split("").map((star, i) => (
-                      <span key={i} className="text-yellow-400">{star}</span>
-                    ))}
-                  </div>
-                  <span className="text-xs text-navy-blue mt-1 font-medium">Avaliação 5.0</span>
-                </div>
               </motion.div>
             </div>
           </motion.div>
