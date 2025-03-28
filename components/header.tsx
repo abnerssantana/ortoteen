@@ -148,37 +148,34 @@ export function Header() {
                           duration: 0.3
                         }}
                       >
-                        <SheetClose asChild>
-                          <Link
-                            href={link.path}
-                            className={`
-                              flex items-center text-base font-medium transition-colors py-3 px-3 rounded-md hover:bg-pink-50
-                              ${pathname === link.path || 
-                              (pathname.startsWith(link.path) && link.path !== "/")
-                                ? "text-pink-500 bg-pink-50/50"
-                                : "text-navy-blue"}
-                            `}
-                            onClick={() => setIsOpen(false)}
-                          >
-                            {link.name}
-                          </Link>
-                        </SheetClose>
+                        <Link
+                          href={link.path}
+                          className={`
+                            flex items-center text-base font-medium transition-colors py-3 px-3 rounded-md hover:bg-pink-50
+                            ${pathname === link.path || 
+                            (pathname.startsWith(link.path) && link.path !== "/")
+                              ? "text-pink-500 bg-pink-50/50"
+                              : "text-navy-blue"}
+                          `}
+                          onClick={() => setIsOpen(false)}
+                        >
+                          {link.name}
+                        </Link>
                       </motion.div>
                     ))}
                   </AnimatePresence>
                 </nav>
                 <div className="p-4 border-t border-pink-100 bg-light-blue/30">
-                  <SheetClose asChild>
-                    <Button
-                      className="w-full bg-pink-500 hover:bg-pink-600 text-white rounded-full"
-                      asChild
-                    >
-                      <Link href="/contato" className="flex items-center justify-center gap-2">
-                        <Calendar size={16} />
-                        Agendar Consulta
-                      </Link>
-                    </Button>
-                  </SheetClose>
+                  <Button
+                    className="w-full bg-pink-500 hover:bg-pink-600 text-white rounded-full"
+                    asChild
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <Link href="/contato" className="flex items-center justify-center gap-2">
+                      <Calendar size={16} />
+                      Agendar Consulta
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </SheetContent>
