@@ -1,71 +1,84 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
-
-interface TransformationCardProps {
-  title: string;
-  duration: string;
-  delay?: number;
-}
-
-function TransformationCard({ title, duration, delay = 0 }: TransformationCardProps) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.5, delay }}
-      whileHover={{ y: -8, transition: { duration: 0.2 } }}
-    >
-      <Card className="border-none shadow-md hover:shadow-lg overflow-hidden transition-all duration-300">
-        <div className="grid grid-cols-1 grid-rows-2 gap-1">
-          <div className="relative">
-            <img
-              src="/placeholder.jpg"
-              alt="Antes do tratamento"
-              className="w-full h-48 object-cover"
-            />
-            <div className="absolute top-2 left-2 bg-pink-500 text-white text-xs py-1 px-2 rounded">Antes</div>
-          </div>
-          <div className="relative">
-            <img
-              src="/placeholder.jpg"
-              alt="Depois do tratamento"
-              className="w-full h-48 object-cover"
-            />
-            <div className="absolute top-2 left-2 bg-green-500 text-white text-xs py-1 px-2 rounded">Depois</div>
-          </div>
-        </div>
-        <CardContent className="pt-4">
-          <h3 className="font-bold text-navy-blue text-center">{title}</h3>
-        </CardContent>
-        <CardFooter className="text-center text-gray-500 text-sm">{duration}</CardFooter>
-      </Card>
-    </motion.div>
-  );
-}
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import Image from "next/image";
 
 export function Transformations() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-  const transformationsData = [
-    {
-      title: "Correção de mordida cruzada e arcadas estreitas com aparelho invisível",
-      duration: "Tratamento: 18 meses"
-    },
-    {
-      title: "Correção da mordida aberta com aparelho estético",
-      duration: "Tratamento: 12 meses"
-    },
-    {
-      title: "Fechamento de espaços com aparelho autoligado",
-      duration: "Tratamento: 14 meses"
-    }
+  // Dados dos casos de transformação
+  const caseGroups = [
+    // Primeiro conjunto de casos
+    [
+      {
+        image: "/assets/casos/caso1.jpeg",
+        title: "Correção de mordida cruzada e arcadas estreitas com aparelho invisível",
+        duration: "Tratamento: 18 meses"
+      },
+      {
+        image: "/assets/casos/caso2.jpeg",
+        title: "Correção da mordida aberta com aparelho estético",
+        duration: "Tratamento: 12 meses"
+      },
+      {
+        image: "/assets/casos/caso3.jpeg",
+        title: "Fechamento de espaços com aparelho autoligado",
+        duration: "Tratamento: 14 meses"
+      }
+    ],
+    // Segundo conjunto de casos
+    [
+      {
+        image: "/assets/casos/caso4.jpeg",
+        title: "Alinhamento dos dentes",
+        duration: "Tratamento: 16 meses"
+      },
+      {
+        image: "/assets/casos/caso5.jpeg",
+        title: "Correção de assimetria das arcadas com aparelho fixo",
+        duration: "Tratamento: 11 meses"
+      },
+      {
+        image: "/assets/casos/caso6.jpeg",
+        title: "Correção de mordida profunda",
+        duration: "Tratamento: 20 meses"
+      }
+    ],
+    // Terceiro conjunto de casos
+    [
+      {
+        image: "/assets/casos/caso7.jpeg",
+        title: "Avanço mandibular e correção da mordida profunda",
+        duration: "Tratamento: 16 meses"
+      },
+      {
+        image: "/assets/casos/caso8.jpeg",
+        title: "Correção com Invisalign",
+        duration: "Tratamento: 11 meses"
+      },
+      {
+        image: "/assets/casos/caso9.jpeg",
+        title: "Arcadas mais largas e alinhadas",
+        duration: "Tratamento: 20 meses"
+      }
+    ]
   ];
+
+  // Funções de navegação
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % caseGroups.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? caseGroups.length - 1 : prev - 1));
+  };
 
   return (
     <section ref={ref} className="py-24 bg-white relative overflow-hidden">
@@ -120,30 +133,91 @@ export function Transformations() {
           </motion.p>
         </motion.div>
 
-        <div className="grid gap-6 md:grid-cols-3 mt-8">
-          {transformationsData.map((transformation, index) => (
-            <TransformationCard
-              key={transformation.title}
-              title={transformation.title}
-              duration={transformation.duration}
-              delay={0.1 + (index * 0.1)}
-            />
+        {/* Cards Grid */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="grid gap-6 md:grid-cols-3 mt-8"
+        >
+          {caseGroups[currentSlide].map((caseItem, index) => (
+            <motion.div
+              key={`${currentSlide}-${index}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              exit={{ opacity: 0, y: 20 }}
+              whileHover={{ y: -8, transition: { duration: 0.2 } }}
+            >
+              <Card className="border-none shadow-md hover:shadow-lg overflow-hidden transition-all duration-300 h-full">
+                <div className="relative overflow-hidden">
+                  <Image
+                    src={caseItem.image}
+                    alt={caseItem.title}
+                    width={400}
+                    height={400}
+                    className="w-full h-96 object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                </div>
+                <CardContent className="pt-4">
+                  <h3 className="font-bold text-navy-blue text-center line-clamp-2 h-12">{caseItem.title}</h3>
+                </CardContent>
+                <CardFooter className="text-center text-gray-500 text-sm">{caseItem.duration}</CardFooter>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
+        {/* Navigation controls */}
         <div className="flex justify-center items-center gap-4 mt-12">
-          <button className="p-2 rounded-full bg-pink-100 text-pink-500 hover:bg-pink-200 transition-colors">
+          <motion.button 
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={prevSlide}
+            className="p-2 rounded-full bg-pink-100 text-pink-500 hover:bg-pink-200 transition-colors"
+            aria-label="Caso anterior"
+          >
             <ChevronLeft className="h-5 w-5" />
-          </button>
+          </motion.button>
           <div className="flex gap-2">
-            <span className="w-2 h-2 rounded-full bg-pink-500"></span>
-            <span className="w-2 h-2 rounded-full bg-gray-300"></span>
-            <span className="w-2 h-2 rounded-full bg-gray-300"></span>
+            {caseGroups.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  index === currentSlide ? "bg-pink-500 w-6" : "bg-pink-200"
+                }`}
+                aria-label={`Ver conjunto de casos ${index + 1}`}
+              />
+            ))}
           </div>
-          <button className="p-2 rounded-full bg-pink-100 text-pink-500 hover:bg-pink-200 transition-colors">
+          <motion.button 
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={nextSlide}
+            className="p-2 rounded-full bg-pink-100 text-pink-500 hover:bg-pink-200 transition-colors"
+            aria-label="Próximo caso"
+          >
             <ChevronRight className="h-5 w-5" />
-          </button>
+          </motion.button>
         </div>
+        
+        {/* CTA Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="flex justify-center mt-12"
+        >
+          <Button
+            className="bg-pink-500 hover:bg-pink-600 text-white rounded-full shadow-md px-6 py-2.5"
+            asChild
+          >
+            <Link href="/contato">
+              Agende sua avaliação
+            </Link>
+          </Button>
+        </motion.div>
       </div>
     </section>
   );

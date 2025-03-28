@@ -5,7 +5,7 @@ import { Specialist } from "@/components/specialist"
 import { Differentials } from "@/components/differentials"
 import { Transformations } from "@/components/transformations"
 import { AboutUs } from "@/components/about-us"
-import { BlogPreview } from "@/components/blog-preview"
+import { BlogPreviewSection } from "@/components/blog/blog-preview-section"
 
 export default function Home() {
   return (
@@ -17,8 +17,7 @@ export default function Home() {
       <Transformations />
       <Testimonials />
       <Specialist />
-      <BlogPreview />
+      <BlogPreviewSection />
     </>
   )
 }
-

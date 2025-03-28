@@ -4,89 +4,80 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ChevronRight, Sparkles, ArrowRight } from "lucide-react";
+import { ChevronRight, Sparkles, ArrowRight, Calendar, Clock } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { formatDate } from "@/lib/utils";
+import { BlogPost } from "@/lib/mdx";
 
-interface BlogCardProps {
-  date: string;
-  category: string;
-  title: string;
-  description: string;
-  imageUrl: string;
-  delay?: number;
+interface BlogPreviewProps {
+  posts: BlogPost[];
 }
 
-function BlogCard({ date, category, title, description, imageUrl, delay = 0 }: BlogCardProps) {
+function BlogCard({ post, index }: { post: BlogPost; index: number }) {
+  const formattedDate = formatDate(post.frontMatter.date);
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.5, delay }}
+      transition={{ duration: 0.5, delay: 0.1 + (index * 0.1) }}
       whileHover={{ y: -8, transition: { duration: 0.2 } }}
     >
-      <Card className="overflow-hidden border-none bg-white shadow-lg hover:shadow-xl transition-all duration-300 group h-full flex flex-col">
-        <div className="relative overflow-hidden">
-          <div className="overflow-hidden">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.4 }}
+      <Link href={`/blog/${post.slug}`} className="block h-full">
+        <Card className="overflow-hidden border-none bg-white shadow-lg hover:shadow-xl transition-all duration-300 group h-full flex flex-col">
+          <div className="relative overflow-hidden">
+            <div className="overflow-hidden">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.4 }}
+              >
+                <img 
+                  src={post.frontMatter.coverImage || "/placeholder.jpg"} 
+                  alt={post.frontMatter.title} 
+                  className="w-full h-48 object-cover"
+                />
+              </motion.div>
+            </div>
+          </div>
+          
+          <CardContent className="pt-4 flex-grow">
+            <div className="flex items-center gap-2 mb-3 text-sm text-gray-500">
+              <div className="flex items-center">
+                <Calendar size={14} className="mr-1" />
+                <span>{formattedDate}</span>
+              </div>
+              <span>•</span>
+              <div className="flex items-center">
+                <Clock size={14} className="mr-1" />
+                <span>{post.readingTime.text}</span>
+              </div>
+            </div>
+            
+            <Badge className="bg-pink-100 text-pink-500 hover:bg-pink-200 mb-2">{post.frontMatter.category}</Badge>
+            <h3 className="font-bold text-navy-blue mb-2 group-hover:text-pink-500 transition-colors text-lg line-clamp-2">{post.frontMatter.title}</h3>
+            <p className="text-sm text-gray-600 line-clamp-3">{post.frontMatter.excerpt}</p>
+          </CardContent>
+          
+          <CardFooter className="text-gray-500 text-sm border-t border-pink-50 flex justify-between items-center">
+            <span className="text-pink-500 font-medium">Ler mais</span>
+            <motion.div 
+              className="opacity-0 group-hover:opacity-100 transition-opacity"
+              whileHover={{ x: 3 }}
             >
-              <img src={imageUrl} alt={title} className="w-full h-48 object-cover" />
+              <ArrowRight size={16} className="text-pink-500" />
             </motion.div>
-          </div>
-          <div className="absolute top-4 left-4 bg-white rounded-lg px-2 py-1 text-center shadow-md">
-            <p className="text-navy-blue font-bold text-sm">{date.split(" ")[0]}</p>
-            <p className="text-pink-500 text-xs">{date.split(" ")[1]}</p>
-          </div>
-        </div>
-        <CardContent className="pt-4 flex-grow">
-          <Badge className="bg-pink-100 text-pink-500 hover:bg-pink-200 mb-2">{category}</Badge>
-          <h3 className="font-bold text-navy-blue mb-2 group-hover:text-pink-500 transition-colors text-lg">{title}</h3>
-          <p className="text-sm text-gray-600">{description}</p>
-        </CardContent>
-        <CardFooter className="text-gray-500 text-sm border-t border-pink-50 flex justify-between items-center">
-          <span>26/2/24</span>
-          <motion.div 
-            className="opacity-0 group-hover:opacity-100 transition-opacity"
-            whileHover={{ x: 3 }}
-          >
-            <ArrowRight size={16} className="text-pink-500" />
-          </motion.div>
-        </CardFooter>
-      </Card>
+          </CardFooter>
+        </Card>
+      </Link>
     </motion.div>
   );
 }
 
-export function BlogPreview() {
+export function BlogPreview({ posts }: BlogPreviewProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
-
-  const blogPostsData = [
-    {
-      date: "26 Fev",
-      category: "ORTODONTIA",
-      title: "Quanto Custa o Tratamento Ortodôntico: Guia Completo de Investimento",
-      description: "Entenda os fatores que influenciam o preço do tratamento ortodôntico e descubra...",
-      imageUrl: "/placeholder.jpg"
-    },
-    {
-      date: "26 Fev",
-      category: "SAÚDE BUCAL",
-      title: "Dentes do Siso: Tudo o Que Você Precisa Saber",
-      description: "Descubra os desafios, sintomas e quando a remoção dos dentes do siso é necessária...",
-      imageUrl: "/placeholder.jpg"
-    },
-    {
-      date: "26 Fev",
-      category: "SAÚDE BUCAL",
-      title: "Saúde Bucal e Estresse: Como Cuidar do Seu Sorriso em Tempos Difíceis",
-      description: "Descubra como o estresse pode afetar sua saúde bucal e aprenda estratégias práticas...",
-      imageUrl: "/placeholder.jpg"
-    }
-  ];
 
   return (
     <section ref={ref} className="py-24 bg-light-blue relative overflow-hidden">
@@ -159,16 +150,8 @@ export function BlogPreview() {
         </motion.div>
 
         <div className="grid gap-6 md:grid-cols-3">
-          {blogPostsData.map((post, index) => (
-            <BlogCard
-              key={post.title}
-              date={post.date}
-              category={post.category}
-              title={post.title}
-              description={post.description}
-              imageUrl={post.imageUrl}
-              delay={0.1 + (index * 0.1)}
-            />
+          {posts.map((post, index) => (
+            <BlogCard key={post.slug} post={post} index={index} />
           ))}
         </div>
 
