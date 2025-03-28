@@ -80,9 +80,9 @@ interface ServiceCardProps {
 
 function ServiceCard({ icon, title, description, bgColor }: ServiceCardProps) {
   return (
-    <Card className="border-none shadow-sm">
+    <Card className="border-none shadow-2xs">
       <CardHeader className={`${bgColor} flex items-center justify-center p-6`}>
-        <div className="bg-white p-3 rounded-lg shadow-sm">{icon}</div>
+        <div className="bg-white p-3 rounded-lg shadow-2xs">{icon}</div>
       </CardHeader>
       <CardContent className="pt-4 text-center">
         <h3 className="font-bold text-navy-blue mb-2">{title}</h3>

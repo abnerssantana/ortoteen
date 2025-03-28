@@ -54,7 +54,7 @@ interface BlogCardProps {
 
 function BlogCard({ date, category, title, description, imageUrl }: BlogCardProps) {
   return (
-    <Card className="overflow-hidden border-none shadow-sm">
+    <Card className="overflow-hidden border-none shadow-2xs">
       <div className="relative">
         <img src={imageUrl || "/placeholder.svg"} alt={title} className="w-full h-48 object-cover" />
         <div className="absolute top-4 left-4 bg-white rounded-lg px-2 py-1 text-center">

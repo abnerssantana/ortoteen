@@ -48,7 +48,7 @@ interface TransformationCardProps {
 
 function TransformationCard({ title, duration }: TransformationCardProps) {
   return (
-    <Card className="border-none shadow-sm overflow-hidden">
+    <Card className="border-none shadow-2xs overflow-hidden">
       <div className="grid grid-cols-1 grid-rows-2 gap-1">
         <img
           src="/placeholder.svg?height=200&width=400"
