@@ -91,7 +91,7 @@ export function Hero() {
               variants={itemVariants}
               className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-navy-blue"
             >
-              Excelência em <span className="text-pink-500">Ortodontia</span> desde 2000
+              Excelência em <span className="text-pink-500 font-extrabold">Ortodontia</span> desde 2000
             </motion.h1>
             
             <motion.p 

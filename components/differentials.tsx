@@ -2,16 +2,17 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Shield, Cpu, Users, Heart, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
+import Image from "next/image";
 
-interface DifferentialCardProps {
-  icon: React.ReactNode;
+interface FeatureCardProps {
   title: string;
   description: string;
+  iconSrc: string;
   delay?: number;
 }
 
-function DifferentialCard({ icon, title, description, delay = 0 }: DifferentialCardProps) {
+function FeatureCard({ title, description, iconSrc, delay = 0 }: FeatureCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -21,11 +22,16 @@ function DifferentialCard({ icon, title, description, delay = 0 }: DifferentialC
       className="flex gap-4 group"
     >
       <motion.div 
-        className="bg-white p-3 rounded-lg h-fit shadow-sm"
         whileHover={{ scale: 1.1, rotate: 5 }}
         transition={{ duration: 0.2 }}
       >
-        {icon}
+        <Image 
+          src={iconSrc} 
+          alt={title}
+          width={40}
+          height={40}
+          className="h-50 w-50"
+        />
       </motion.div>
       <div>
         <h3 className="font-bold text-navy-blue mb-2 group-hover:text-pink-500 transition-colors">{title}</h3>
@@ -35,30 +41,30 @@ function DifferentialCard({ icon, title, description, delay = 0 }: DifferentialC
   );
 }
 
-export function Differentials() {
+export function Differentials () {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
-  const differentialsData = [
+  const featuresData = [
     {
-      icon: <Shield className="h-6 w-6 text-purple-600" />,
       title: "Segurança Prioritária",
-      description: "Seguimos rigorosos protocolos de biossegurança para garantir seu atendimento com total tranquilidade"
+      description: "Seguimos rigorosos protocolos de biossegurança para garantir seu atendimento com total tranquilidade",
+      iconSrc: "/assets/icons/home_features_safety-first.svg"
     },
     {
-      icon: <Cpu className="h-6 w-6 text-purple-600" />,
       title: "Tecnologia Avançada",
-      description: "Utilizamos equipamentos modernos e técnicas inovadoras para garantir tratamentos eficientes e confortáveis"
+      description: "Utilizamos equipamentos modernos e técnicas inovadoras para garantir tratamentos eficientes e confortáveis",
+      iconSrc: "/assets/icons/home_features_fullservice-d.svg"
     },
     {
-      icon: <Users className="h-6 w-6 text-purple-600" />,
       title: "Serviços Completos",
-      description: "Desde consultas preventivas até tratamentos ortodônticos avançados"
+      description: "Desde consultas preventivas até tratamentos ortodônticos avançados",
+      iconSrc: "/assets/icons/home_features_insurance.svg"
     },
     {
-      icon: <Heart className="h-6 w-6 text-purple-600" />,
       title: "Atendimento Humanizado",
-      description: "Recebemos todos os pacientes com empatia e cuidado, sem julgamentos e com total atenção às necessidades"
+      description: "Recebemos todos os pacientes com empatia e cuidado, sem julgamentos e com total atenção às necessidades",
+      iconSrc: "/assets/icons/home_features_no-judgement.svg"
     }
   ];
 
@@ -122,12 +128,12 @@ export function Differentials() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12"
         >
-          {differentialsData.map((differential, index) => (
-            <DifferentialCard
-              key={differential.title}
-              icon={differential.icon}
-              title={differential.title}
-              description={differential.description}
+          {featuresData.map((feature, index) => (
+            <FeatureCard
+              key={feature.title}
+              title={feature.title}
+              description={feature.description}
+              iconSrc={feature.iconSrc}
               delay={0.1 + (index * 0.1)}
             />
           ))}
