@@ -1,37 +1,124 @@
-import { Button } from "@/components/ui/button"
-import { Phone } from "lucide-react"
+"use client";
+
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { 
+  Calendar, 
+  Phone, 
+  Sparkles, 
+  Shield, 
+  Smile, 
+  Clock, 
+  ChevronDown 
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export function Hero() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: false, amount: 0.3 });
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" }
+    }
+  };
+
+  const floatingBadges = [
+    { icon: <Shield size={14} />, text: "Segurança Prioritária", delay: 0 },
+    { icon: <Smile size={14} />, text: "Tratamentos de Qualidade", delay: 0.8 },
+    { icon: <Clock size={14} />, text: "Atendimento Humanizado", delay: 1.6 }
+  ];
+
   return (
-    <section className="relative overflow-hidden bg-light-blue py-16">
+    <section ref={ref} className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden px-4 bg-light-blue">
+      {/* Background elements */}
       <div className="absolute inset-0 z-0">
-        <svg className="h-full w-full" viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M-122 231.107C-15.1667 154.44 252.4 15.5067 466 59.1067C679.6 102.707 758.167 334.44 784 446.107C837.833 405.44 968.9 343.707 1074.5 410.107C1180.1 476.507 1232.33 554.44 1245 584.607C1303.17 552.94 1435.8 504.507 1502 561.107C1568.2 617.707 1557.67 726.44 1546 774.607"
-            stroke="rgba(255, 255, 255, 0.2)"
-            strokeWidth="2"
-          />
-          <path
-            d="M-122 331.107C-15.1667 254.44 252.4 115.507 466 159.107C679.6 202.707 758.167 434.44 784 546.107C837.833 505.44 968.9 443.707 1074.5 510.107C1180.1 576.507 1232.33 654.44 1245 684.607C1303.17 652.94 1435.8 604.507 1502 661.107C1568.2 717.707 1557.67 826.44 1546 874.607"
-            stroke="rgba(255, 255, 255, 0.2)"
-            strokeWidth="2"
-          />
-        </svg>
+        <motion.div
+          className="absolute w-[500px] h-[500px] -top-20 -left-20 bg-blue-100 rounded-full blur-3xl opacity-60"
+          animate={{
+            x: [0, 20, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{ duration: 15, repeat: Infinity, repeatType: "reverse" }}
+        />
+        <motion.div
+          className="absolute w-[400px] h-[400px] bottom-0 right-1/4 bg-pink-100 rounded-full blur-3xl opacity-50"
+          animate={{
+            x: [0, -20, 0],
+            y: [0, -30, 0],
+          }}
+          transition={{ duration: 12, repeat: Infinity, repeatType: "reverse" }}
+        />
       </div>
-      <div className="container relative z-10">
-        <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
-          <div className="space-y-4">
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-navy-blue">
-              Excelência em Ortodontia desde 2000
-            </h1>
-            <p className="max-w-[600px] text-gray-600 md:text-xl">
-              Referência em São José do Rio Preto, próximo ao Plaza Shopping. Combinamos tecnologia avançada e
-              atendimento especializado para todas as idades.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="bg-pink-500 hover:bg-pink-600 text-white rounded-full">Marque sua consulta</Button>
-              <div className="flex items-center gap-2">
-                <div className="bg-white p-2 rounded-full">
+
+      {/* Subtle pattern overlay */}
+      <div className="absolute inset-0 z-0 opacity-10 pattern-dots text-navy-blue"></div>
+
+      <div className="container mx-auto relative z-10">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center"
+        >
+          {/* Text Content */}
+          <div>
+            <motion.div variants={itemVariants} className="mb-4">
+              <div className="inline-flex items-center px-4 py-1.5 text-sm font-medium border rounded-full border-pink-300 text-pink-500 mb-4">
+                <Sparkles size={14} className="mr-2 text-pink-500" />
+                <span>Ortodontia Especializada</span>
+              </div>
+            </motion.div>
+
+            <motion.h1 
+              variants={itemVariants}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-navy-blue"
+            >
+              Excelência em <span className="text-pink-500">Ortodontia</span> desde 2000
+            </motion.h1>
+            
+            <motion.p 
+              variants={itemVariants}
+              className="text-lg text-navy-blue/80 mb-8 max-w-xl"
+            >
+              Referência em São José do Rio Preto, combinamos tecnologia avançada e 
+              atendimento especializado para transformar sorrisos em todas as idades.
+            </motion.p>
+            
+            <motion.div 
+              variants={itemVariants}
+              className="flex flex-col sm:flex-row gap-4"
+            >
+              <Button 
+                size="lg"
+                className="bg-pink-500 hover:bg-pink-600 text-white rounded-full group"
+                asChild
+              >
+                <Link href="/contato">
+                  <Calendar size={16} className="mr-2" />
+                  <span>Marque sua consulta</span>
+                </Link>
+              </Button>
+              
+              <div className="flex items-center gap-2 p-2">
+                <div className="bg-white p-2 rounded-full shadow-sm">
                   <Phone className="h-5 w-5 text-pink-500" />
                 </div>
                 <div>
@@ -39,34 +126,105 @@ export function Hero() {
                   <p className="text-navy-blue font-medium">17 98114-1014</p>
                 </div>
               </div>
+            </motion.div>
+            
+            {/* Floating badges */}
+            <div className="relative mt-16 hidden md:block">
+              {floatingBadges.map((badge, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ 
+                    delay: badge.delay,
+                    duration: 0.5
+                  }}
+                  className="absolute"
+                  style={{ 
+                    left: `${index * 25}%`, 
+                    top: `${index * 15}px` 
+                  }}
+                >
+                  <motion.div
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ 
+                      repeat: Infinity, 
+                      duration: 4 + index, 
+                      ease: "easeInOut",
+                      delay: index * 0.5
+                    }}
+                  >
+                    <div className="inline-flex items-center rounded-full bg-white/90 backdrop-blur-sm border border-pink-200 text-xs py-1.5 px-3 shadow-sm">
+                      <span className="mr-1.5 text-pink-500">{badge.icon}</span>
+                      <span className="text-navy-blue">{badge.text}</span>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              ))}
             </div>
           </div>
-          <div className="flex justify-center">
-            <div className="relative rounded-lg overflow-hidden">
-              <img
-                src="/placeholder.svg?height=400&width=500"
-                alt="Paciente em consulta odontológica"
-                className="rounded-lg object-cover"
-                width={500}
-                height={400}
-              />
-              <div className="absolute top-4 left-4 bg-purple-600 p-2 rounded-lg">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M12 3C8.5 3 5.5 5.5 5.5 9C5.5 10.3 6 11.5 7 12.5L12 17.5L17 12.5C18 11.5 18.5 10.3 18.5 9C18.5 5.5 15.5 3 12 3Z"
-                    fill="white"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="container mt-16 text-center">
-        <h2 className="text-3xl font-bold text-navy-blue">Seu sorriso perfeito, nossa especialidade.</h2>
-        <div className="w-24 h-1 bg-pink-500 mx-auto mt-2"></div>
-      </div>
-    </section>
-  )
-}
 
+          {/* Image */}
+          <motion.div
+            variants={itemVariants}
+            className="relative"
+          >
+            <div className="relative rounded-2xl overflow-hidden shadow-xl">
+              <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 to-blue-500/20 mix-blend-overlay z-10"></div>
+              
+              <motion.div
+                className="relative z-0"
+                animate={{ scale: [1, 1.03, 1] }}
+                transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
+              >
+                <Image 
+                  src="/placeholder.jpg" 
+                  alt="Paciente em consulta odontológica" 
+                  width={600}
+                  height={700}
+                  className="w-full h-auto object-cover rounded-2xl"
+                />
+              </motion.div>
+              
+              {/* Decorative elements */}
+              <motion.div 
+                className="absolute top-5 left-5 p-3 bg-white/90 backdrop-blur-sm border border-pink-100 rounded-lg shadow-lg z-20"
+                animate={{ y: [0, 8, 0] }}
+                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+              >
+                <Smile className="h-6 w-6 text-pink-500" />
+              </motion.div>
+              
+              <motion.div 
+                className="absolute bottom-5 right-5 p-4 bg-white/90 backdrop-blur-sm border border-pink-100 rounded-lg shadow-lg z-20"
+                animate={{ y: [0, -8, 0] }}
+                transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+              >
+                <div className="flex flex-col items-center">
+                  <div className="flex">
+                    {"★★★★★".split("").map((star, i) => (
+                      <span key={i} className="text-yellow-400">{star}</span>
+                    ))}
+                  </div>
+                  <span className="text-xs text-navy-blue mt-1 font-medium">Avaliação 5.0</span>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+      
+      {/* Scroll indicator */}
+      <motion.div 
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+      >
+        <div className="bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-md">
+          <ChevronDown size={20} className="text-pink-500" />
+        </div>
+        <span className="text-xs text-navy-blue mt-2 font-medium">Saiba mais</span>
+      </motion.div>
+    </section>
+  );
+}
