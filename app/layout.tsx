@@ -9,8 +9,8 @@ import { Footer } from "@/components/footer"
 import { ScrollToTop } from "@/components/scroll-to-top"
 
 export const metadata: Metadata = {
-  title: "Ortoteen - Ortodontia para Adolescentes",
-  description: "Serviços de ortodontia especializados para adolescentes e adultos",
+  title: "Ortoteen - Ortodontia para todas as idades",
+  description: "Excelência em Ortodontia desde 2000. Referência em São José do Rio Preto, combinamos tecnologia avançada e atendimento especializado para transformar sorrisos em todas as idades.",
   generator: 'Abner Santana - Fastlogia'
 }
 
