@@ -39,7 +39,7 @@ export function AboutUs() {
   };
 
   return (
-    <section ref={containerRef} className="py-24 bg-white relative overflow-hidden">
+    <section ref={containerRef} className="py-24 bg-white relative overflow-hidden" id="sobre">
       {/* Background elements */}
       <div className="absolute inset-0 -z-10 opacity-5 pattern-dots text-navy-blue"></div>
       

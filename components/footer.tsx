@@ -12,7 +12,7 @@ export function Footer() {
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   
   return (
-    <footer ref={ref} className="bg-navy-blue text-white py-20 relative overflow-hidden">
+    <footer ref={ref} className="bg-navy-blue text-white py-20 relative overflow-hidden" id="footer">
       {/* Background effects */}
       <div className="absolute inset-0 -z-10 opacity-5 pattern-dots text-blue-400"></div>
       <motion.div 
@@ -48,7 +48,7 @@ export function Footer() {
                 alt="Logo Ortoteen" 
                 width={220} 
                 height={90}
-                className="h-auto w-auto" 
+                className="sm:w-48 md:w-56 lg:w-64 mx-auto" 
               />
             </motion.div>
             
@@ -72,7 +72,7 @@ export function Footer() {
           >
             <h3 className="text-xl font-semibold mb-6 text-center md:text-left">REDES SOCIAIS</h3>
             <div className="flex gap-6">
-              <Link href="https://instagram.com/dratacianapalamoni" 
+              <Link href="https://www.instagram.com/dratacipalamoni/" 
                 className="text-white hover:text-pink-300  flex flex-col items-center"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -83,7 +83,7 @@ export function Footer() {
                 <span className="text-xs mt-2">Instagram</span>
               </Link>
               
-              <Link href="https://tiktok.com/@dratacianapalamoni" 
+              <Link href="https://www.tiktok.com/@dratacianapalamoni" 
                 className="text-white hover:text-pink-300  flex flex-col items-center"
                 target="_blank"
                 rel="noopener noreferrer"
