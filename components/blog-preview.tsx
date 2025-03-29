@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ChevronRight, Sparkles, ArrowRight, Calendar, Clock, Rss } from "lucide-react";
+import { ChevronRight, ArrowRight, Calendar, Clock, Rss } from "lucide-react";
 import Link from "next/link";
 import { formatDate } from "@/lib/utils";
 import { BlogPost } from "@/lib/mdx";

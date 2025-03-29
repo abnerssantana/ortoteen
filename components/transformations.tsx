@@ -1,15 +1,20 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { ChevronLeft, ChevronRight, Users } from "lucide-react";
 import Image from "next/image";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function Transformations() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentCase, setCurrentCase] = useState(0);
+  const isMobile = useIsMobile();
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
 
   // Dados dos casos de transformação
   const caseGroups = [
@@ -69,13 +74,63 @@ export function Transformations() {
     ]
   ];
 
-  // Funções de navegação
+  // Flatten the case groups for mobile view
+  const allCases = caseGroups.flat();
+
+  // Funções de navegação para desktop
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % caseGroups.length);
   };
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev === 0 ? caseGroups.length - 1 : prev - 1));
+  };
+
+  // Funções de navegação para mobile
+  const nextCase = () => {
+    setCurrentCase((prev) => (prev + 1) % allCases.length);
+  };
+
+  const prevCase = () => {
+    setCurrentCase((prev) => (prev === 0 ? allCases.length - 1 : prev - 1));
+  };
+
+  // Auto-slider functionality
+  useEffect(() => {
+    if (isAutoPlaying) {
+      autoPlayRef.current = setInterval(() => {
+        if (isMobile) {
+          nextCase();
+        } else {
+          nextSlide();
+        }
+      }, 6000); // Change slide every 6 seconds
+    }
+    
+    return () => {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current);
+      }
+    };
+  }, [isAutoPlaying, isMobile, currentSlide, currentCase]);
+
+  // Pause auto-rotation when user interacts
+  const handleManualNavigation = (callback: () => void) => {
+    // Pause auto-rotation
+    setIsAutoPlaying(false);
+    
+    // Execute the navigation callback
+    callback();
+    
+    // Clear existing interval if any
+    if (autoPlayRef.current) {
+      clearInterval(autoPlayRef.current);
+    }
+    
+    // Restart auto-rotation after 10 seconds of inactivity
+    setTimeout(() => {
+      setIsAutoPlaying(true);
+    }, 10000);
   };
 
   return (
@@ -131,75 +186,147 @@ export function Transformations() {
           </motion.p>
         </motion.div>
 
-        {/* Cards Grid */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="grid gap-6 md:grid-cols-3 mt-8"
-        >
-          {caseGroups[currentSlide].map((caseItem, index) => (
-            <motion.div
-              key={`${currentSlide}-${index}`}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              exit={{ opacity: 0, y: 20 }}
-              whileHover={{ y: -8, transition: { duration: 0.2 } }}
-            >
-              <Card className="border-none shadow-md hover:shadow-lg overflow-hidden transition-all duration-300 h-full">
-                <div className="relative overflow-hidden">
-                  <Image
-                    src={caseItem.image}
-                    alt={caseItem.title}
-                    width={400}
-                    height={400}
-                    className="w-full h-96 object-cover transition-transform duration-500 hover:scale-105"
-                  />
-                </div>
-                <CardContent className="pt-4">
-                  <h3 className="font-bold text-navy-blue text-center line-clamp-2 h-12">{caseItem.title}</h3>
-                </CardContent>
-                <CardFooter className="text-center text-gray-500 text-sm">{caseItem.duration}</CardFooter>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Navigation controls */}
-        <div className="flex justify-center items-center gap-4 mt-12">
-          <motion.button 
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={prevSlide}
-            className="p-2 rounded-full bg-pink-100 text-pink-500 hover:bg-pink-200 transition-colors"
-            aria-label="Caso anterior"
+        {/* Desktop View (3 cards grid) */}
+        {!isMobile && (
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="hidden md:grid gap-6 md:grid-cols-3 mt-8"
           >
-            <ChevronLeft className="h-5 w-5" />
-          </motion.button>
-          <div className="flex gap-2">
-            {caseGroups.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  index === currentSlide ? "bg-pink-500 w-6" : "bg-pink-200"
-                }`}
-                aria-label={`Ver conjunto de casos ${index + 1}`}
-              />
+            {caseGroups[currentSlide].map((caseItem, index) => (
+              <motion.div
+                key={`desktop-${currentSlide}-${index}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                exit={{ opacity: 0, y: 20 }}
+                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+              >
+                <Card className="border-none shadow-md hover:shadow-lg overflow-hidden transition-all duration-300 h-full">
+                  <div className="relative overflow-hidden pt-[75%]"> {/* 4:3 aspect ratio */}
+                    <Image
+                      src={caseItem.image}
+                      alt={caseItem.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    />
+                  </div>
+                  <CardContent className="pt-4">
+                    <h3 className="font-bold text-navy-blue text-center line-clamp-2 min-h-12">{caseItem.title}</h3>
+                  </CardContent>
+                  <CardFooter className="text-center text-gray-500 text-sm">{caseItem.duration}</CardFooter>
+                </Card>
+              </motion.div>
             ))}
+          </motion.div>
+        )}
+
+        {/* Mobile View (Single card with animation) */}
+        {isMobile && (
+          <div className="md:hidden mt-8">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`mobile-${currentCase}`}
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ duration: 0.5 }}
+                className="mx-auto max-w-sm"
+              >
+                <Card className="border-none shadow-md hover:shadow-lg overflow-hidden transition-all duration-300 h-full">
+                  <div className="relative overflow-hidden pt-[75%]"> {/* 4:3 aspect ratio */}
+                    <Image
+                      src={allCases[currentCase].image}
+                      alt={allCases[currentCase].title}
+                      fill
+                      sizes="(max-width: 768px) 100vw"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500"
+                    />
+                  </div>
+                  <CardContent className="pt-4">
+                    <h3 className="font-bold text-navy-blue text-center">{allCases[currentCase].title}</h3>
+                  </CardContent>
+                  <CardFooter className="text-center text-gray-500 text-sm">{allCases[currentCase].duration}</CardFooter>
+                </Card>
+              </motion.div>
+            </AnimatePresence>
           </div>
-          <motion.button 
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={nextSlide}
-            className="p-2 rounded-full bg-pink-100 text-pink-500 hover:bg-pink-200 transition-colors"
-            aria-label="Próximo caso"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </motion.button>
+        )}
+
+        {/* Navigation controls - different for mobile and desktop */}
+        <div className="flex justify-center items-center gap-4 mt-12">
+          {isMobile ? (
+            // Mobile navigation
+            <>
+              <motion.button 
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleManualNavigation(prevCase)}
+                className="p-2 rounded-full bg-pink-100 text-pink-500 hover:bg-pink-200 transition-colors"
+                aria-label="Caso anterior"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </motion.button>
+              <div className="flex gap-2 overflow-x-auto py-2 max-w-[60vw] justify-center">
+                {allCases.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleManualNavigation(() => setCurrentCase(index))}
+                    className={`w-2 h-2 rounded-full transition-all flex-shrink-0 ${
+                      index === currentCase ? "bg-pink-500 w-6" : "bg-pink-200"
+                    }`}
+                    aria-label={`Ver caso ${index + 1}`}
+                  />
+                ))}
+              </div>
+              <motion.button 
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleManualNavigation(nextCase)}
+                className="p-2 rounded-full bg-pink-100 text-pink-500 hover:bg-pink-200 transition-colors"
+                aria-label="Próximo caso"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </motion.button>
+            </>
+          ) : (
+            // Desktop navigation
+            <>
+              <motion.button 
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleManualNavigation(prevSlide)}
+                className="p-2 rounded-full bg-pink-100 text-pink-500 hover:bg-pink-200 transition-colors"
+                aria-label="Conjunto anterior"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </motion.button>
+              <div className="flex gap-2">
+                {caseGroups.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleManualNavigation(() => setCurrentSlide(index))}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      index === currentSlide ? "bg-pink-500 w-6" : "bg-pink-200"
+                    }`}
+                    aria-label={`Ver conjunto de casos ${index + 1}`}
+                  />
+                ))}
+              </div>
+              <motion.button 
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleManualNavigation(nextSlide)}
+                className="p-2 rounded-full bg-pink-100 text-pink-500 hover:bg-pink-200 transition-colors"
+                aria-label="Próximo conjunto"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </motion.button>
+            </>
+          )}
         </div>
-        
       </div>
     </section>
   );
