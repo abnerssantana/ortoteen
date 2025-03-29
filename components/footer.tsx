@@ -9,12 +9,12 @@ import { Instagram, Facebook, Clock, MapPin, Phone } from "lucide-react";
 export function Footer() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
-  
+
   return (
     <footer ref={ref} className="bg-navy-blue text-white py-20 relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 -z-10 opacity-5 pattern-dots text-blue-400"></div>
-      <motion.div 
+      <motion.div
         className="absolute -top-40 -right-40 w-96 h-96 bg-pink-500/5 rounded-full blur-3xl"
         animate={{
           scale: [1, 1.2, 1],
@@ -26,7 +26,7 @@ export function Footer() {
           repeatType: "reverse"
         }}
       />
-      
+
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -35,21 +35,21 @@ export function Footer() {
           className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
         >
           <div>
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2 }}
               className="mb-6"
             >
-              <Image 
+              <Image
                 src="/placeholder-logo.png"
-                alt="Logo Ortoteen" 
-                width={150} 
+                alt="Logo Ortoteen"
+                width={150}
                 height={60}
-                className="h-20 w-auto" 
+                className="h-20 w-auto"
               />
             </motion.div>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -58,7 +58,7 @@ export function Footer() {
               Há mais de duas décadas, buscamos a melhor qualidade na prestação de serviços e cuidados odontológicos
               especializados.
             </motion.p>
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.4 }}
@@ -92,7 +92,12 @@ export function Footer() {
                     </div>
                     <div>
                       <p className="text-blue-200 text-sm">WHATSAPP</p>
-                      <p className="text-white">17 98114-1014</p>
+                      <Link
+                        href="https://api.whatsapp.com/send?phone=5517981141014&text=Olá,%20eu%20gostaria%20de%20agendar%20uma%20Avaliação!"
+                        className="text-white"
+                      >
+                        17 98114-1014
+                      </Link>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
@@ -148,7 +153,7 @@ export function Footer() {
             </div>
           </div>
         </motion.div>
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.6 }}

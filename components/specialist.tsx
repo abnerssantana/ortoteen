@@ -72,7 +72,7 @@ export function Specialist() {
                   size="lg"
                   asChild
                 >
-                  <Link href="/contato" className="flex items-center">
+                  <Link href="https://api.whatsapp.com/send?phone=5517981141014&text=Olá,%20eu%20gostaria%20de%20agendar%20uma%20Avaliação!" className="flex items-center">
                     <span>Marque Sua Consulta</span>
                     <Phone className="ml-2 group-hover:animate-pulse" size={16} />
                   </Link>

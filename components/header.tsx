@@ -48,16 +48,15 @@ export function Header() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
           ? "bg-white/95 backdrop-blur-md shadow-md py-2"
           : "bg-transparent py-3 md:py-4"
-      }`}
+        }`}
     >
       <div className="container px-4 sm:px-2 mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="flex items-center relative z-10">
-          <motion.span 
+          <motion.span
             className="text-2xl font-bold text-navy-blue transition-colors hover:text-navy-blue"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
@@ -75,8 +74,8 @@ export function Header() {
                   href={link.path}
                   className={`
                     text-sm font-medium transition-colors hover:text-pink-500 px-3 py-2 inline-block
-                    ${pathname === link.path || 
-                    (pathname.startsWith(link.path) && link.path !== "/")
+                    ${pathname === link.path ||
+                      (pathname.startsWith(link.path) && link.path !== "/")
                       ? "text-pink-500 font-semibold"
                       : "text-navy-blue"}
                   `}
@@ -84,14 +83,14 @@ export function Header() {
                   {link.name}
                 </Link>
                 {/* Indicador de ativo */}
-                {(pathname === link.path || 
-                 (pathname.startsWith(link.path) && link.path !== "/")) && (
-                  <motion.div
-                    layoutId="activeNav"
-                    className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-pink-500 rounded-full"
-                    transition={{ duration: 0.3 }}
-                  />
-                )}
+                {(pathname === link.path ||
+                  (pathname.startsWith(link.path) && link.path !== "/")) && (
+                    <motion.div
+                      layoutId="activeNav"
+                      className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1/2 h-0.5 bg-pink-500 rounded-full"
+                      transition={{ duration: 0.3 }}
+                    />
+                  )}
               </li>
             ))}
           </ul>
@@ -101,7 +100,7 @@ export function Header() {
             asChild
           >
             <Link href="/contato" className="flex items-center gap-1.5">
-              <Phone size={14} /> 
+              <Phone size={14} />
               <span>Agendar</span>
             </Link>
           </Button>
@@ -119,16 +118,16 @@ export function Header() {
             <SheetContent side="right" className="w-full max-w-xs p-0 border-l border-pink-100">
               <div className="flex flex-col h-full bg-white">
                 <div className="p-4 border-b border-pink-100 flex justify-between items-center">
-                  <Link 
-                    href="/" 
+                  <Link
+                    href="/"
                     className="text-xl font-bold text-navy-blue"
                     onClick={() => setIsOpen(false)}
                   >
                     Ortoteen
                   </Link>
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
+                  <Button
+                    variant="ghost"
+                    size="icon"
                     onClick={() => setIsOpen(false)}
                     className="text-navy-blue"
                   >
@@ -138,12 +137,12 @@ export function Header() {
                 <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
                   <AnimatePresence>
                     {navLinks.map((link, index) => (
-                      <motion.div 
+                      <motion.div
                         key={link.path}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: 20 }}
-                        transition={{ 
+                        transition={{
                           delay: index * 0.05,
                           duration: 0.3
                         }}
@@ -152,8 +151,8 @@ export function Header() {
                           href={link.path}
                           className={`
                             flex items-center text-base font-medium transition-colors py-3 px-3 rounded-md hover:bg-pink-50
-                            ${pathname === link.path || 
-                            (pathname.startsWith(link.path) && link.path !== "/")
+                            ${pathname === link.path ||
+                              (pathname.startsWith(link.path) && link.path !== "/")
                               ? "text-pink-500 bg-pink-50/50"
                               : "text-navy-blue"}
                           `}
@@ -171,7 +170,7 @@ export function Header() {
                     asChild
                     onClick={() => setIsOpen(false)}
                   >
-                    <Link href="/contato" className="flex items-center justify-center gap-2">
+                    <Link href="https://api.whatsapp.com/send?phone=5517981141014&text=Olá,%20eu%20gostaria%20de%20agendar%20uma%20Avaliação!" className="flex items-center justify-center gap-2">
                       <Calendar size={16} />
                       Agendar Consulta
                     </Link>
