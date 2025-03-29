@@ -14,8 +14,10 @@ interface BlogPostPageProps {
 }
 
 export async function generateMetadata(
-  { params }: BlogPostPageProps
+  props: BlogPostPageProps
 ): Promise<Metadata> {
+  // Correctly handle params in Next.js 15
+  const params = await Promise.resolve(props.params);
   const post = await getPostBySlug(params.slug);
   
   if (!post) {
@@ -30,7 +32,9 @@ export async function generateMetadata(
   };
 }
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
+export default async function BlogPostPage(props: BlogPostPageProps) {
+  // Correctly handle params in Next.js 15
+  const params = await Promise.resolve(props.params);
   const post = await getPostBySlug(params.slug);
   
   if (!post) {
