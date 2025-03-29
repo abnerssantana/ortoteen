@@ -49,8 +49,8 @@ export function Header() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-md py-2"
-          : "bg-transparent py-3 md:py-4"
+        ? "bg-white/95 backdrop-blur-md shadow-md py-2"
+        : "bg-transparent py-3 md:py-4"
         }`}
     >
       <div className="container px-4 sm:px-2 mx-auto flex justify-between items-center">
@@ -106,8 +106,19 @@ export function Header() {
           </Button>
         </nav>
 
+
         {/* Menu Mobile */}
-        <div className="md:hidden">
+        <div className="md:hidden flex items-center gap-2">
+          {/* Botão WhatsApp para mobile */}
+          <Button
+            className="bg-pink-500 hover:bg-pink-600 text-white rounded-full shadow-sm"
+            size="sm"
+            asChild
+          >
+            <Link href="https://api.whatsapp.com/send?phone=5517981141014&text=Olá,%20eu%20gostaria%20de%20agendar%20uma%20Avaliação!" className="flex items-center">
+              <Phone size={14} /> WhastApp
+            </Link>
+          </Button>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="text-navy-blue">
