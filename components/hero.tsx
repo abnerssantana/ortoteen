@@ -168,21 +168,21 @@ export function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
                       delay: badge.delay,
-                      duration: 0.5
+                      duration: 0.6
                     }}
                     className="absolute"
                     style={{
-                      left: `${index * 33}%`,
-                      top: `${index * 20}px`
+                      left: `${index * 30}%`,
+                      top: `${index * 25}px`
                     }}
                   >
                     <motion.div
-                      animate={{ y: [0, -10, 0] }}
+                      animate={{ y: [0, -12, 0] }}
                       transition={{
                         repeat: Infinity,
                         duration: 4 + index,
                         ease: "easeInOut",
-                        delay: index * 0.5
+                        delay: index * 0.7
                       }}
                     >
                       <div className="inline-flex items-center rounded-full bg-white/90 backdrop-blur-sm border border-pink-200 text-xs py-1.5 px-3 shadow-sm">

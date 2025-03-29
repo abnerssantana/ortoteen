@@ -29,8 +29,8 @@ export function Footer() {
       />
       
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Logo and social media section */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {/* Column 1: Logo and description */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -61,41 +61,42 @@ export function Footer() {
               Há mais de duas décadas, buscamos a melhor qualidade na prestação de serviços e 
               cuidados odontológicos especializados, transformando sorrisos e vidas em São José do Rio Preto.
             </motion.p>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="mt-4"
-            >
-              <p className="text-white font-medium mb-4 text-center md:text-left">NOSSAS REDES SOCIAIS</p>
-              <div className="flex gap-6">
-                <Link href="https://instagram.com/dratacianapalamoni" 
-                  className="text-white hover:text-pink-300 transition-colors flex flex-col items-center"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div className="bg-pink-500/20 p-3 rounded-full hover:bg-pink-500/30 transition-colors">
-                    <Instagram className="h-6 w-6" />
-                  </div>
-                  <span className="text-xs mt-2">Instagram</span>
-                </Link>
-                
-                <Link href="https://tiktok.com/@dratacianapalamoni" 
-                  className="text-white hover:text-pink-300 transition-colors flex flex-col items-center"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div className="bg-pink-500/20 p-3 rounded-full hover:bg-pink-500/30 transition-colors">
-                    <FaTiktok className="h-6 w-6" />
-                  </div>
-                  <span className="text-xs mt-2">TikTok</span>
-                </Link>
-              </div>
-            </motion.div>
           </motion.div>
           
-          {/* Contact information section */}
+          {/* Column 2: Social Media */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex flex-col items-center md:items-start"
+          >
+            <h3 className="text-xl font-semibold mb-6 text-center md:text-left">REDES SOCIAIS</h3>
+            <div className="flex gap-6">
+              <Link href="https://instagram.com/dratacianapalamoni" 
+                className="text-white hover:text-pink-300  flex flex-col items-center"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="bg-pink-500 p-3 rounded-full hover:bg-pink-500/90 ">
+                  <Instagram className="h-6 w-6" />
+                </div>
+                <span className="text-xs mt-2">Instagram</span>
+              </Link>
+              
+              <Link href="https://tiktok.com/@dratacianapalamoni" 
+                className="text-white hover:text-pink-300  flex flex-col items-center"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="bg-pink-500 p-3 rounded-full hover:bg-pink-500/30 ">
+                  <FaTiktok className="h-6 w-6" />
+                </div>
+                <span className="text-xs mt-2">TikTok</span>
+              </Link>
+            </div>
+          </motion.div>
+          
+          {/* Column 3: Contact information */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -111,14 +112,14 @@ export function Footer() {
                 transition={{ duration: 0.5, delay: 0.4 }}
                 whileHover={{ x: 5 }}
               >
-                <div className="bg-pink-500/20 p-3 rounded-full">
+                <div className="bg-pink-500 p-3 rounded-full">
                   <Phone className="h-5 w-5 text-white" />
                 </div>
                 <div>
                   <p className="text-blue-200 text-sm font-medium">WHATSAPP</p>
                   <Link 
                     href="https://api.whatsapp.com/send?phone=5517981141014&text=Olá,%20eu%20gostaria%20de%20agendar%20uma%20Avaliação!" 
-                    className="text-white text-lg hover:text-pink-300 transition-colors"
+                    className="text-white text-lg hover:text-pink-300 "
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -135,7 +136,7 @@ export function Footer() {
                 transition={{ duration: 0.5, delay: 0.5 }}
                 whileHover={{ x: 5 }}
               >
-                <div className="bg-pink-500/20 p-3 rounded-full">
+                <div className="bg-pink-500 p-3 rounded-full">
                   <Clock className="h-5 w-5 text-white" />
                 </div>
                 <div>
@@ -152,7 +153,7 @@ export function Footer() {
                 transition={{ duration: 0.5, delay: 0.6 }}
                 whileHover={{ x: 5 }}
               >
-                <div className="bg-pink-500/20 p-3 rounded-full">
+                <div className="bg-pink-500 p-3 rounded-full">
                   <MapPin className="h-5 w-5 text-white" />
                 </div>
                 <div>
@@ -161,7 +162,7 @@ export function Footer() {
                   <p className="text-white">Bom Jardim - São José do Rio Preto - SP</p>
                   <Link 
                     href="https://maps.google.com/?q=Avenida+Emílio+Trevisan+655,+Sala+609,+São+José+do+Rio+Preto" 
-                    className="text-blue-200 text-sm hover:text-pink-300 transition-colors"
+                    className="text-blue-200 text-sm hover:text-pink-300 "
                     target="_blank"
                     rel="noopener noreferrer"
                   >
