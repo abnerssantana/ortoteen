@@ -211,14 +211,13 @@ export function Hero() {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
+        className="absolute bottom-22 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
         animate={{ y: [0, 8, 0] }}
         transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
       >
         <div className="bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-md">
           <ChevronDown size={20} className="text-pink-500" />
         </div>
-        <span className="text-xs text-navy-blue mt-2 font-medium">Saiba mais</span>
       </motion.div>
     </section>
   );
