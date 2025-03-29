@@ -77,16 +77,6 @@ export function Specialist() {
                     <Phone className="ml-2 group-hover:animate-pulse" size={16} />
                   </Link>
                 </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-white text-white hover:bg-white/10"
-                  asChild
-                >
-                  <Link href="/contato">
-                    Saiba Mais
-                  </Link>
-                </Button>
               </div>
             </motion.div>
 

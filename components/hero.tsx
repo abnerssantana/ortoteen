@@ -4,14 +4,14 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { 
-  Calendar, 
-  Phone, 
-  Sparkles, 
-  Shield, 
-  Smile, 
-  Clock, 
-  ChevronDown 
+import {
+  Calendar,
+  Phone,
+  Sparkles,
+  Shield,
+  Smile,
+  Clock,
+  ChevronDown
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -47,11 +47,11 @@ export function Hero() {
   ];
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden px-4 bg-light-blue">
+    <section ref={ref} className="relative min-h-screen flex items-center pt-10 pb-16 overflow-hidden px-4 bg-light-blue">
       {/* Background wave image */}
       <div className="absolute inset-0 z-0">
-        <Image 
-          src="/assets/wave-background.png" 
+        <Image
+          src="/assets/wave-background.png"
           alt="Background"
           fill
           priority
@@ -59,7 +59,7 @@ export function Hero() {
           className="opacity-60"
         />
       </div>
-      
+
       {/* Background elements */}
       <div className="absolute inset-0 z-0">
         <motion.div
@@ -99,26 +99,26 @@ export function Hero() {
               </div>
             </motion.div>
 
-            <motion.h1 
+            <motion.h1
               variants={itemVariants}
               className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-navy-blue"
             >
               Excelência em <span className="text-pink-500 font-extrabold">Ortodontia</span> desde 2000
             </motion.h1>
-            
-            <motion.p 
+
+            <motion.p
               variants={itemVariants}
               className="text-lg text-navy-blue mb-8 max-w-xl"
             >
-              Referência em São José do Rio Preto, combinamos tecnologia avançada e 
+              Referência em São José do Rio Preto, combinamos tecnologia avançada e
               atendimento especializado para transformar sorrisos em todas as idades.
             </motion.p>
-            
-            <motion.div 
+
+            <motion.div
               variants={itemVariants}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <Button 
+              <Button
                 size="lg"
                 className="bg-pink-500 hover:bg-pink-600 text-white rounded-full group"
                 asChild
@@ -128,7 +128,7 @@ export function Hero() {
                   <span>Marque sua consulta</span>
                 </Link>
               </Button>
-              
+
               <div className="flex items-center gap-2 p-2">
                 <div className="bg-white p-2 rounded-full shadow-sm">
                   <Phone className="h-5 w-5 text-pink-500" />
@@ -139,7 +139,7 @@ export function Hero() {
                 </div>
               </div>
             </motion.div>
-            
+
             {/* Floating badges */}
             <div className="relative mt-16 hidden md:block">
               {floatingBadges.map((badge, index) => (
@@ -147,21 +147,21 @@ export function Hero() {
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ 
+                  transition={{
                     delay: badge.delay,
                     duration: 0.5
                   }}
                   className="absolute"
-                  style={{ 
-                    left: `${index * 25}%`, 
-                    top: `${index * 15}px` 
+                  style={{
+                    left: `${index * 25}%`,
+                    top: `${index * 15}px`
                   }}
                 >
                   <motion.div
                     animate={{ y: [0, -10, 0] }}
-                    transition={{ 
-                      repeat: Infinity, 
-                      duration: 4 + index, 
+                    transition={{
+                      repeat: Infinity,
+                      duration: 4 + index,
                       ease: "easeInOut",
                       delay: index * 0.5
                     }}
@@ -179,26 +179,25 @@ export function Hero() {
           {/* Image */}
           <motion.div
             variants={itemVariants}
-            className="relative"
+            className="relative hidden md:block" // Adicionado "hidden md:block"
           >
             <div className="relative rounded-2xl overflow-hidden">
-                        
               <motion.div
                 className="relative z-0"
                 animate={{ scale: [1, 1.03, 1] }}
                 transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
               >
-                <Image 
-                  src="/home.png" 
-                  alt="Paciente em consulta odontológica" 
+                <Image
+                  src="/home.png"
+                  alt="Paciente em consulta odontológica"
                   width={600}
                   height={700}
                   className="w-full h-auto object-cover rounded-2xl"
                 />
               </motion.div>
-              
+
               {/* Decorative elements */}
-              <motion.div 
+              <motion.div
                 className="absolute top-5 right-10 p-3 bg-white/90 backdrop-blur-sm border border-pink-100 rounded-lg shadow-lg z-20"
                 animate={{ y: [0, 8, 0] }}
                 transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
@@ -209,9 +208,9 @@ export function Hero() {
           </motion.div>
         </motion.div>
       </div>
-      
+
       {/* Scroll indicator */}
-      <motion.div 
+      <motion.div
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
         animate={{ y: [0, 8, 0] }}
         transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
