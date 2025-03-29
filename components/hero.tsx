@@ -48,6 +48,18 @@ export function Hero() {
 
   return (
     <section ref={ref} className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden px-4 bg-light-blue">
+      {/* Background wave image */}
+      <div className="absolute inset-0 z-0">
+        <Image 
+          src="/assets/wave-background.png" 
+          alt="Background"
+          fill
+          priority
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
+          className="opacity-60"
+        />
+      </div>
+      
       {/* Background elements */}
       <div className="absolute inset-0 z-0">
         <motion.div
@@ -96,7 +108,7 @@ export function Hero() {
             
             <motion.p 
               variants={itemVariants}
-              className="text-lg text-navy-blue/80 mb-8 max-w-xl"
+              className="text-lg text-navy-blue mb-8 max-w-xl"
             >
               Referência em São José do Rio Preto, combinamos tecnologia avançada e 
               atendimento especializado para transformar sorrisos em todas as idades.
