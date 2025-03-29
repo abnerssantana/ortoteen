@@ -5,7 +5,7 @@ import { PostCard } from "@/components/blog/post-card";
 import { CategoryFilter } from "@/components/blog/category-filter";
 import { BLOG_CONFIG } from "@/lib/blog-config";
 import { Pagination } from "@/components/blog/pagination";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Rss } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Blog - Ortoteen",
@@ -30,9 +30,9 @@ export default async function BlogPage() {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center px-4 py-1.5 text-sm font-medium rounded-full bg-purple text-white mb-4">
-            <Sparkles size={14} className="mr-2 text-pink-500" />
-            <span>BLOG</span>
+          <div className="inline-flex items-center px-4 py-1.5 text-sm font-medium rounded-full bg-purple text-white mb-4"          >
+            <Rss size={14} className="mr-2 text-white" />
+            <span>Blog</span>
           </div>
           
           <h1 className="text-4xl font-bold text-navy-blue mb-4">

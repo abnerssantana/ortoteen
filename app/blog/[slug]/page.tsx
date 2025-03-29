@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getPostBySlug, compileMDXContent } from "@/lib/mdx";
-import { mdxComponents } from "@/components/blog/mdx-components";
 import { PostHeader } from "@/components/blog/post-header";
 import { ShareButtons } from "@/components/blog/share-buttons";
 import { Button } from "@/components/ui/button";

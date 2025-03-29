@@ -77,9 +77,9 @@ export function PostCard({
           </CardContent>
           
           <CardFooter className="text-gray-500 text-sm border-t border-pink-50 flex justify-between items-center">
-            <span className="text-pink-500 font-medium">Ler mais</span>
+            <span className="text-pink-500 font-medium mt-3">Ler mais</span>
             <motion.div 
-              className="text-pink-500"
+              className="text-pink-500 mt-3"
               whileHover={{ x: 3 }}
             >
               <ArrowRight size={16} />
