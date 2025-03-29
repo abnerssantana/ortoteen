@@ -14,7 +14,9 @@ interface BlogPageProps {
   };
 }
 
-export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: BlogPageProps
+): Promise<Metadata> {
   const page = parseInt(params.page);
   
   return {

@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { Instagram, Clock, MapPin, Phone } from "lucide-react";
-import { FaTiktok } from "react-icons/fa";
+import { FaTiktok, FaYoutube } from "react-icons/fa";
 
 export function Footer() {
   const ref = useRef(null);
@@ -91,6 +91,17 @@ export function Footer() {
                   <FaTiktok className="h-6 w-6" />
                 </div>
                 <span className="text-xs mt-2">TikTok</span>
+              </Link>
+
+              <Link href="https://www.youtube.com/@dratacianapalamoni4017" 
+                className="text-white hover:text-pink-300  flex flex-col items-center"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="bg-pink-500 p-3 rounded-full hover:bg-pink-500/30 ">
+                  <FaYoutube className="h-6 w-6" />
+                </div>
+                <span className="text-xs mt-2">YouTube</span>
               </Link>
             </div>
           </motion.div>

@@ -13,7 +13,9 @@ interface CategoryPageProps {
   };
 }
 
-export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: CategoryPageProps
+): Promise<Metadata> {
   const categorySlug = params.category;
   const categoryObj = BLOG_CONFIG.categoriesList.find(c => c.slug === categorySlug);
   
@@ -49,7 +51,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <Link href="/blog" className="inline-block">
-            <div className="inline-flex items-center px-4 py-1.5 text-sm font-medium rounded-full bg-purple text-white mb-4"            >
+            <div className="inline-flex items-center px-4 py-1.5 text-sm font-medium rounded-full bg-purple text-white mb-4">
               <Rss size={14} className="mr-2 text-white-500" />
               <span>Blog</span>
             </div>

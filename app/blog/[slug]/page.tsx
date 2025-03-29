@@ -13,7 +13,9 @@ interface BlogPostPageProps {
   };
 }
 
-export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: BlogPostPageProps
+): Promise<Metadata> {
   const post = await getPostBySlug(params.slug);
   
   if (!post) {
@@ -46,10 +48,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="mb-8">
-          <Button 
+        <Button 
             variant="outline" 
             size="sm"
-            className="group"
+            className="group bg-purple text-white"
             asChild
           >
             <Link href="/blog">
@@ -59,7 +61,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </Button>
         </div>
         
-        <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
+        <div className="mx-auto bg-white rounded-xl shadow-lg p-8">
           <PostHeader post={post} />
           
           <article className="prose prose-lg max-w-none">
