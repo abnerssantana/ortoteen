@@ -70,7 +70,6 @@ export function Footer() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="flex flex-col items-center md:items-start"
           >
-            <h3 className="text-xl font-semibold mb-6 text-center md:text-left">REDES SOCIAIS</h3>
             <div className="flex gap-6">
               <Link href="https://www.instagram.com/dratacipalamoni/" 
                 className="text-white hover:text-pink-300  flex flex-col items-center"
@@ -103,7 +102,6 @@ export function Footer() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-col items-center md:items-start"
           >
-            <h3 className="text-xl font-semibold mb-6 text-center md:text-left">CONTATO & INFORMAÇÕES</h3>
             <div className="space-y-6">
               <motion.div 
                 className="flex items-start gap-4"

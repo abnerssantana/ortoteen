@@ -28,7 +28,7 @@ const navLinks = [
   { name: "Serviços", path: "#services" },
   { name: "Sobre", path: "#sobre" },
   { name: "Blog", path: "/blog" },
-  { name: "Contato", path: "/contato" }
+  { name: "Contato", path: "#footer" }
 ];
 
 export function Header() {

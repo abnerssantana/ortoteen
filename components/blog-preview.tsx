@@ -6,7 +6,6 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ChevronRight, Sparkles, ArrowRight, Calendar, Clock, Rss } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import { formatDate } from "@/lib/utils";
 import { BlogPost } from "@/lib/mdx";
 
@@ -60,13 +59,13 @@ function BlogCard({ post, index }: { post: BlogPost; index: number }) {
             <p className="text-sm text-gray-600 line-clamp-3">{post.frontMatter.excerpt}</p>
           </CardContent>
           
-          <CardFooter className="text-gray-500 text-sm border-t border-pink-50 flex justify-between items-center">
-            <span className="text-pink-500 font-medium">Ler mais</span>
+          <CardFooter className="text-gray-500 text-sm border-t border-pink-50 flex justify-between items-center pb-4">
+            <span className="text-pink-500 font-medium mt-3">Ler mais</span>
             <motion.div 
               className="opacity-0 group-hover:opacity-100 transition-opacity"
               whileHover={{ x: 3 }}
             >
-              <ArrowRight size={16} className="text-pink-500" />
+              <ArrowRight size={16} className="text-pink-500 mt-3" />
             </motion.div>
           </CardFooter>
         </Card>
