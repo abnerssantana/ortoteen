@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Sparkles } from "lucide-react";
+import { Phone } from "lucide-react";
 
 export function Specialist() {
   const ref = useRef(null);
@@ -53,10 +53,6 @@ export function Specialist() {
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <div className="inline-flex items-center px-4 py-1.5 text-sm font-medium border rounded-full border-pink-300 text-pink-300 mb-4">
-                <Sparkles size={14} className="mr-2 text-pink-300" />
-                <span>ESPECIALISTAS EM FAZER VOCÊ SORRIR</span>
-              </div>
 
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-white">
                 Inovação e Conforto no Cuidado Odontológico

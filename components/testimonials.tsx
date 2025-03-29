@@ -114,7 +114,7 @@ export function Testimonials () {
             className="inline-flex items-center px-4 py-1.5 text-sm font-medium rounded-full bg-purple text-white mb-4"
           >
             <Sparkles size={14} className="mr-2 text-white" />
-            <span>O QUE NOSSOS PACIENTES DIZEM</span>
+            <span>O que nossos pacientes dizem</span>
           </motion.div>
 
           <motion.h2 

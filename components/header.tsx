@@ -99,9 +99,9 @@ export function Header() {
             size="sm"
             asChild
           >
-            <Link href="/contato" className="flex items-center gap-1.5">
+            <Link href="https://api.whatsapp.com/send?phone=5517981141014&text=Olá,%20eu%20gostaria%20de%20agendar%20uma%20Avaliação!" className="flex items-center gap-1.5">
               <Phone size={14} />
-              <span>Agendar</span>
+              <span>WhastApp</span>
             </Link>
           </Button>
         </nav>

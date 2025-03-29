@@ -2,8 +2,10 @@
 
 import { useRef } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { Check, Award, Calendar, Star } from "lucide-react";
+import { Check, Award, Calendar, Star, Phone } from "lucide-react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export function AboutUs() {
   const ref = useRef(null);
@@ -226,16 +228,16 @@ export function AboutUs() {
               transition={{ delay: 1.1, duration: 0.7 }}
               className="mt-8"
             >
-              <motion.button
-                className="px-8 py-3 bg-pink-500 text-white rounded-full font-medium flex items-center gap-2 hover:bg-pink-600 transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Agende sua consulta
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1 7H13M13 7L7 1M13 7L7 13" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </motion.button>
+             <Button 
+  className="bg-pink-500 hover:bg-pink-600 text-white shadow-lg group"
+  size="lg"
+  asChild
+>
+  <Link href="https://api.whatsapp.com/send?phone=5517981141014&text=Olá,%20eu%20gostaria%20de%20agendar%20uma%20Avaliação!" className="flex items-center">
+    <span>Agendar Consulta</span>
+    <Phone className="ml-2 group-hover:animate-pulse" size={16} />
+  </Link>
+</Button>
             </motion.div>
           </motion.div>
         </motion.div>

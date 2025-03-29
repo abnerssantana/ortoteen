@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
+import { ChevronLeft, ChevronRight, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
@@ -108,10 +108,10 @@ export function Transformations() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center px-4 py-1.5 text-sm font-medium border rounded-full border-pink-300 text-pink-500 mb-4"
+            className="inline-flex items-center px-4 py-1.5 text-sm font-medium bg-purple rounded-full text-white mb-4"
           >
-            <Sparkles size={14} className="mr-2 text-pink-500" />
-            <span>CASOS REAIS</span>
+            <Users size={14} className="mr-2 text-white" />
+            <span>Casos reais</span>
           </motion.div>
 
           <motion.h2 
@@ -202,22 +202,6 @@ export function Transformations() {
           </motion.button>
         </div>
         
-        {/* CTA Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="flex justify-center mt-12"
-        >
-          <Button
-            className="bg-pink-500 hover:bg-pink-600 text-white rounded-full shadow-md px-6 py-2.5"
-            asChild
-          >
-            <Link href="/contato">
-              Agende sua avaliação
-            </Link>
-          </Button>
-        </motion.div>
       </div>
     </section>
   );
