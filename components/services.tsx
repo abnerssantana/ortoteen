@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Sparkles } from "lucide-react";
+import { HeartHandshake } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Image from "next/image";
 
@@ -91,7 +91,7 @@ function ServiceCard({ icon, altText, title, description, bgColor, delay = 0 }: 
       <Card className="h-full border-none shadow-md hover:shadow-lg transition-all duration-300 bg-white rounded-lg">
         <CardHeader className={`${bgColor} flex items-center justify-center p-6`}>
           <motion.div 
-            className="bg-white p-1 rounded-lg shadow-md w-20 h-20 flex items-center justify-center"
+            className="bg-white rounded-lg shadow-md w-23 h-23 flex items-center justify-center"
             whileHover={{ scale: 1.1, rotate: 5 }}
             transition={{ duration: 0.2 }}
           >
@@ -160,7 +160,7 @@ export function Services() {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center px-4 py-1.5 text-sm font-medium rounded-full bg-purple text-white mb-4"
           >
-            <Sparkles size={14} className="mr-2 text-white" />
+            <HeartHandshake size={14} className="mr-2 text-white" />
             <span>Nossos Serviços</span>
           </motion.div>
 
@@ -170,7 +170,7 @@ export function Services() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl md:text-5xl font-bold text-navy-blue mb-2"
           >
-            Agende sua consulta
+            Soluções Completas para o Seu Sorriso
           </motion.h2>
 
           <motion.p

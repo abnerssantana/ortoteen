@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Sparkles } from "lucide-react";
+import { Star } from "lucide-react";
 import Image from "next/image";
 
 interface FeatureCardProps {
@@ -99,10 +99,10 @@ export function Differentials() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center px-4 py-1.5 text-sm font-medium border rounded-full border-pink-300 text-pink-500 mb-4"
+            className="inline-flex items-center px-4 py-1.5 text-sm font-medium rounded-full bg-purple text-white mb-4"
           >
-            <Sparkles size={14} className="mr-2 text-pink-500" />
-            <span>DIFERENCIAIS</span>
+            <Star size={14} className="mr-2 text-white" />
+            <span>Diferenciais</span>
           </motion.div>
 
           <motion.h2 

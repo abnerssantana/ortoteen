@@ -14,10 +14,12 @@ import {
   ChevronDown
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function Hero() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.3 });
+  const isMobile = useIsMobile();
 
   // Animation variants
   const containerVariants = {
@@ -25,8 +27,8 @@ export function Hero() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
+        staggerChildren: isMobile ? 0.1 : 0.2,
+        delayChildren: isMobile ? 0.1 : 0.3
       }
     }
   };
@@ -36,7 +38,7 @@ export function Hero() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" }
+      transition: { duration: isMobile ? 0.5 : 0.8, ease: "easeOut" }
     }
   };
 
@@ -60,24 +62,35 @@ export function Hero() {
         />
       </div>
 
-      {/* Background elements */}
+      {/* Background elements - simplified on mobile */}
       <div className="absolute inset-0 z-0">
-        <motion.div
-          className="absolute w-[500px] h-[500px] -top-20 -left-20 bg-blue-100 rounded-full blur-3xl opacity-60"
-          animate={{
-            x: [0, 20, 0],
-            y: [0, 30, 0],
-          }}
-          transition={{ duration: 15, repeat: Infinity, repeatType: "reverse" }}
-        />
-        <motion.div
-          className="absolute w-[400px] h-[400px] bottom-0 right-1/4 bg-pink-100 rounded-full blur-3xl opacity-50"
-          animate={{
-            x: [0, -20, 0],
-            y: [0, -30, 0],
-          }}
-          transition={{ duration: 12, repeat: Infinity, repeatType: "reverse" }}
-        />
+        {!isMobile && (
+          <>
+            <motion.div
+              className="absolute w-[500px] h-[500px] -top-20 -left-20 bg-blue-100 rounded-full blur-3xl opacity-60"
+              animate={{
+                x: [0, 20, 0],
+                y: [0, 30, 0],
+              }}
+              transition={{ duration: 15, repeat: Infinity, repeatType: "reverse" }}
+            />
+            <motion.div
+              className="absolute w-[400px] h-[400px] bottom-0 right-1/4 bg-pink-100 rounded-full blur-3xl opacity-50"
+              animate={{
+                x: [0, -20, 0],
+                y: [0, -30, 0],
+              }}
+              transition={{ duration: 12, repeat: Infinity, repeatType: "reverse" }}
+            />
+          </>
+        )}
+        {/* Static elements for mobile */}
+        {isMobile && (
+          <>
+            <div className="absolute w-[500px] h-[500px] -top-20 -left-20 bg-blue-100 rounded-full blur-3xl opacity-60" />
+            <div className="absolute w-[400px] h-[400px] bottom-0 right-1/4 bg-pink-100 rounded-full blur-3xl opacity-50" />
+          </>
+        )}
       </div>
 
       {/* Subtle pattern overlay */}
@@ -123,7 +136,7 @@ export function Hero() {
                 className="bg-pink-500 hover:bg-pink-600 text-white rounded-full group"
                 asChild
               >
-                <Link href="/contato">
+                <Link href="https://api.whatsapp.com/send?phone=5517981141014&text=Olá,%20eu%20gostaria%20de%20agendar%20uma%20Avaliação!">
                   <Calendar size={16} className="mr-2" />
                   <span>Marque sua consulta</span>
                 </Link>
@@ -135,57 +148,64 @@ export function Hero() {
                 </div>
                 <div>
                   <p className="text-sm text-pink-500 font-medium">FALE CONOSCO</p>
-                  <p className="text-2xl text-navy-blue font-bold">17 98114-1014</p>
+                  <Link
+                    href="https://api.whatsapp.com/send?phone=5517981141014&text=Olá,%20eu%20gostaria%20de%20agendar%20uma%20Avaliação!"
+                    className="text-2xl text-navy-blue font-bold"
+                  >
+                    17 98114-1014
+                  </Link>
                 </div>
               </div>
             </motion.div>
 
-            {/* Floating badges */}
-            <div className="relative mt-16 hidden md:block">
-              {floatingBadges.map((badge, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    delay: badge.delay,
-                    duration: 0.5
-                  }}
-                  className="absolute"
-                  style={{
-                    left: `${index * 25}%`,
-                    top: `${index * 15}px`
-                  }}
-                >
+            {/* Floating badges - only on desktop */}
+            {!isMobile && (
+              <div className="relative mt-16 hidden md:block">
+                {floatingBadges.map((badge, index) => (
                   <motion.div
-                    animate={{ y: [0, -10, 0] }}
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{
-                      repeat: Infinity,
-                      duration: 4 + index,
-                      ease: "easeInOut",
-                      delay: index * 0.5
+                      delay: badge.delay,
+                      duration: 0.5
+                    }}
+                    className="absolute"
+                    style={{
+                      left: `${index * 33}%`,
+                      top: `${index * 20}px`
                     }}
                   >
-                    <div className="inline-flex items-center rounded-full bg-white/90 backdrop-blur-sm border border-pink-200 text-xs py-1.5 px-3 shadow-sm">
-                      <span className="mr-1.5 text-pink-500">{badge.icon}</span>
-                      <span className="text-navy-blue">{badge.text}</span>
-                    </div>
+                    <motion.div
+                      animate={{ y: [0, -10, 0] }}
+                      transition={{
+                        repeat: Infinity,
+                        duration: 4 + index,
+                        ease: "easeInOut",
+                        delay: index * 0.5
+                      }}
+                    >
+                      <div className="inline-flex items-center rounded-full bg-white/90 backdrop-blur-sm border border-pink-200 text-xs py-1.5 px-3 shadow-sm">
+                        <span className="mr-1.5 text-pink-500">{badge.icon}</span>
+                        <span className="text-navy-blue">{badge.text}</span>
+                      </div>
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Image */}
           <motion.div
             variants={itemVariants}
-            className="relative hidden md:block" // Adicionado "hidden md:block"
+            className="relative hidden md:block"
           >
             <div className="relative rounded-2xl overflow-hidden">
               <motion.div
                 className="relative z-0"
-                animate={{ scale: [1, 1.03, 1] }}
-                transition={{ repeat: Infinity, duration: 15, ease: "easeInOut" }}
+                animate={!isMobile ? { scale: [1, 1.03, 1] } : { scale: 1 }}
+                transition={!isMobile ? { repeat: Infinity, duration: 15, ease: "easeInOut" } : {}}
               >
                 <Image
                   src="/home.png"
@@ -196,24 +216,26 @@ export function Hero() {
                 />
               </motion.div>
 
-              {/* Decorative elements */}
-              <motion.div
-                className="absolute top-5 right-10 p-3 bg-white/90 backdrop-blur-sm border border-pink-100 rounded-lg shadow-lg z-20"
-                animate={{ y: [0, 8, 0] }}
-                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-              >
-                <Smile className="h-6 w-6 text-pink-500" />
-              </motion.div>
+              {/* Decorative elements - only on desktop */}
+              {!isMobile && (
+                <motion.div
+                  className="absolute top-5 right-10 p-3 bg-white/90 backdrop-blur-sm border border-pink-100 rounded-lg shadow-lg z-20"
+                  animate={{ y: [0, 8, 0] }}
+                  transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+                >
+                  <Smile className="h-6 w-6 text-pink-500" />
+                </motion.div>
+              )}
             </div>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator - simplified on mobile */}
       <motion.div
         className="absolute bottom-22 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+        animate={!isMobile ? { y: [0, 8, 0] } : { y: 0 }}
+        transition={!isMobile ? { repeat: Infinity, duration: 2, ease: "easeInOut" } : {}}
       >
         <div className="bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-md">
           <ChevronDown size={20} className="text-pink-500" />

@@ -3,7 +3,6 @@ import type { Metadata } from "next"
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ScrollToTop } from "@/components/scroll-to-top"
@@ -22,12 +21,10 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body className={GeistSans.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
           <Header />
           <main>{children}</main>
           <Footer />
           <ScrollToTop />
-        </ThemeProvider>
       </body>
     </html>
   )
