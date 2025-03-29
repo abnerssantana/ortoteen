@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ChevronRight, Sparkles, ArrowRight, Calendar, Clock } from "lucide-react";
+import { ChevronRight, Sparkles, ArrowRight, Calendar, Clock, Rss } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { formatDate } from "@/lib/utils";
@@ -124,17 +124,17 @@ export function BlogPreview({ posts }: BlogPreviewProps) {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center px-4 py-1.5 text-sm font-medium border rounded-full border-pink-300 text-pink-500 mb-4 bg-white shadow-sm"
+            className="inline-flex items-center px-4 py-1.5 text-sm font-medium rounded-full bg-purple text-white mb-4"
           >
-            <Sparkles size={14} className="mr-2 text-pink-500" />
-            <span>BLOG</span>
+            <Rss size={14} className="mr-2 text-white" />
+            <span>Blog</span>
           </motion.div>
 
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl font-bold text-navy-blue mb-4"
+            className="text-4xl md:text-5xl font-bold text-navy-blue mb-2"
           >
             Dicas para sua saúde bucal
           </motion.h2>

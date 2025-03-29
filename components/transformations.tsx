@@ -118,7 +118,7 @@ export function Transformations() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl font-bold text-navy-blue mb-4"
+            className="text-4xl md:text-5xl font-bold text-navy-blue mb-2"
           >
             Transformações que Inspiram
           </motion.h2>

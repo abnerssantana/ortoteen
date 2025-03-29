@@ -22,7 +22,7 @@ import {
 
 // Links de navegação
 const navLinks = [
-  { name: "Home", path: "/" },
+  { name: "Início", path: "/" },
   { name: "Serviços", path: "#services" },
   { name: "Sobre", path: "#sobre" },
   { name: "Blog", path: "/blog" },

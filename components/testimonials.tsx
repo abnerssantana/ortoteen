@@ -111,9 +111,9 @@ export function Testimonials () {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center px-4 py-1.5 text-sm font-medium border rounded-full border-pink-300 text-pink-500 mb-4"
+            className="inline-flex items-center px-4 py-1.5 text-sm font-medium rounded-full bg-purple text-white mb-4"
           >
-            <Sparkles size={14} className="mr-2 text-pink-500" />
+            <Sparkles size={14} className="mr-2 text-white" />
             <span>O QUE NOSSOS PACIENTES DIZEM</span>
           </motion.div>
 
@@ -121,7 +121,7 @@ export function Testimonials () {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl font-bold text-navy-blue mb-4"
+            className="text-4xl md:text-5xl font-bold text-navy-blue mb-2"
           >
             Sorrisos que falam por nós!
           </motion.h2>

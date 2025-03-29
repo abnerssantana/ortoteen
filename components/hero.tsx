@@ -93,8 +93,8 @@ export function Hero() {
           {/* Text Content */}
           <div>
             <motion.div variants={itemVariants} className="mb-4">
-              <div className="inline-flex items-center px-4 py-1.5 text-sm font-medium border rounded-full border-pink-300 text-pink-500 mb-4">
-                <Sparkles size={14} className="mr-2 text-pink-500" />
+              <div className="inline-flex items-center px-4 py-1.5 text-sm font-medium rounded-full bg-purple text-white mb-4">
+                <Sparkles size={14} className="mr-2 text-white" />
                 <span>Ortodontia Especializada</span>
               </div>
             </motion.div>
