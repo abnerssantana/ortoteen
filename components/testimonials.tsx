@@ -5,37 +5,14 @@ import { motion, useInView } from "framer-motion";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ChevronLeft, ChevronRight, Sparkles, Quote } from "lucide-react";
+import { testimonials } from "@/lib/testimonials-data";
 
-interface TestimonialData {
-  quote: string;
-  author: string;
-  role: string;
-}
-
-export function Testimonials () {
+export function Testimonials() {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const [activeSlide, setActiveSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
-
-  const testimonials: TestimonialData[] = [
-    {
-      quote: "Desde a primeira consulta, antes do início do tratamento, já pude constatar que a Dra. Taciana era uma ótima profissional, e ela conseguiu passar uma sensação de que todo o processo seria o mais rápido e menos desconfortável possível. Hoje, depois de termos concluído um tratamento de 2 anos em 1 ano e 7 meses, só posso dizer que a impressão inicial não estava à altura.",
-      author: "Victor Hugo",
-      role: "Paciente há 2 anos"
-    },
-    {
-      quote: "Excelente profissional desde o começo do tratamento até o fim. Super indico e recomendo. Obrigado por tudo.",
-      author: "Camila Eduarda",
-      role: "Paciente há 1 ano"
-    },
-    {
-      quote: "Maravilhoso desde o atendimento (a Vitória secretária e auxiliar maravilhosa, super educada e prestativa), até seu último dia de tratamento. Profissional ímpar, responsável e muito dedicada!!! Super indico, garanto que ficarão satisfeitos com o resultado. Parabéns Dra Taciana seu atendimento e profissionalismo são impecáveis",
-      author: "Luciana Dias",
-      role: "Paciente há 3 anos"
-    }
-  ];
 
   // Function to go to next slide
   const nextSlide = () => {
@@ -173,7 +150,7 @@ export function Testimonials () {
                 <CardFooter className="flex flex-col items-start gap-4">
                   <div className="flex items-center gap-4">
                     <Avatar>
-                      <AvatarImage src="/placeholder-user.jpg" />
+                      <AvatarImage src={testimonial.avatarSrc || "/placeholder-user.jpg"} />
                       <AvatarFallback>
                         {testimonial.author
                           .split(" ")
@@ -223,7 +200,7 @@ export function Testimonials () {
             <CardFooter className="flex flex-col items-start gap-4">
               <div className="flex items-center gap-4">
                 <Avatar>
-                  <AvatarImage src="/placeholder-user.jpg" />
+                  <AvatarImage src={testimonials[activeSlide].avatarSrc || "/placeholder-user.jpg"} />
                   <AvatarFallback>
                     {testimonials[activeSlide].author
                       .split(" ")

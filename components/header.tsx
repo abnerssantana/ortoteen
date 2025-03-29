@@ -9,7 +9,9 @@ import {
   Sheet,
   SheetContent,
   SheetTrigger,
-  SheetClose
+  SheetClose,
+  SheetHeader,
+  SheetTitle
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 // Import de ícones
@@ -26,7 +28,7 @@ const navLinks = [
   { name: "Serviços", path: "#services" },
   { name: "Sobre", path: "#sobre" },
   { name: "Blog", path: "/blog" },
-  { name: "Contato", path: "#footer" }
+  { name: "Contato", path: "/contato" }
 ];
 
 export function Header() {
@@ -127,6 +129,9 @@ export function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-full max-w-xs p-0 border-l border-pink-100">
+              <SheetHeader className="sr-only">
+                <SheetTitle>Menu de navegação</SheetTitle>
+              </SheetHeader>
               <div className="flex flex-col h-full bg-white">
                 <div className="p-4 border-b border-pink-100 flex justify-between items-center">
                   <Link
